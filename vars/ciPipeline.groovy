@@ -31,7 +31,23 @@ def call(Closure body) {
                         runTests(config)
         }
     }
-}  
+}
+            stage('Docker Build & Push') {
+    steps {
+        script {
+            imageTag = dockerBuildPush(config)
+        }
+    }
+}
+
+stage('Deploy') {
+    steps {
+        script {
+            deployCloudRun(config, imageTag)
+        }
+    }
+}
+
         }
     }
 }
