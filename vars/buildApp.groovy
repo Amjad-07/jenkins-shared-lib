@@ -4,14 +4,17 @@ def call(Map config) {
 
     if (config.appType == "python") {
         sh """
-          echo "Checking Python version"
-          python3 --version
+          echo "Creating virtual environment"
+          python3 -m venv venv
+
+          echo "Activating virtual environment"
+          . venv/bin/activate
 
           echo "Installing dependencies"
-          pip3 install -r requirements.txt
+          pip install -r requirements.txt
 
-          echo "Running build step"
-          python3 app.py
+          echo "Running application"
+          python app.py
         """
     }
     else {
