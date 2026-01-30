@@ -25,6 +25,13 @@ def call(Closure body) {
                     }
                 }
             }
+          stage('Test') {
+                steps {
+                    script {
+                        runTests(config)
+        }
+    }
+}  
         }
     }
 }
